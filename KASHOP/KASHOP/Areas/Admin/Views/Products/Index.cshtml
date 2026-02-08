@@ -1,0 +1,54 @@
+﻿@using KASHOP.Models.ViewModels
+@model List<ProductsViewModel>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">No Products Found</div>
+}
+
+else
+{
+    <table class="table table-bordered" role="table">
+        <thead>
+            <tr>
+                <th style="width: 10px" scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                @* <th scope="col">Category</th> *@
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr class="align-middle">
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>
+                        <img src="@product.Image" />
+                    </td>
+                    @* <td>@product.Category.Name</td> *@
+                    <td>
+                        <a class="btn btn-danger" asp-controller="Products" asp-action="remove" asp-route-id="@product.Id">
+                            Delete
+                        </a>
+                        <a class="btn btn-info" asp-controller="Products" asp-action="edit" asp-route-id="@product.Id">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<div class="card-footer clearfix">
+    <ul class="pagination pagination-sm m-0 float-end">
+        <li class="page-item"><a class="page-link" href="#">«</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">»</a></li>
+    </ul>
+</div>
+
